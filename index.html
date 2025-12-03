@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kroniki Zagiętego Czasu: Misja Ucznia Ocalenia Historii</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Title Screen -->
+    <div id="title-screen" class="screen active">
+        <div class="title-container">
+            <h1 class="game-title">Kroniki Zagiętego Czasu</h1>
+            <p class="subtitle">Misja Ucznia Ocalenia Historii</p>
+            <div class="title-menu">
+                <button class="menu-btn" id="start-game">Rozpocznij Przygodę</button>
+                <button class="menu-btn" id="show-controls">Sterowanie</button>
+            </div>
+            <div class="credits">Pełna wersja gry RPG z humorystycznymi postaciami historycznymi</div>
+        </div>
+    </div>
+
+    <!-- Controls Screen -->
+    <div id="controls-screen" class="screen">
+        <div class="controls-container">
+            <h2>Sterowanie</h2>
+            <div class="control-list">
+                <div class="control-item">
+                    <span class="key">WASD / Strzałki</span>
+                    <span class="desc">Poruszanie się</span>
+                </div>
+                <div class="control-item">
+                    <span class="key">E / Enter</span>
+                    <span class="desc">Interakcja</span>
+                </div>
+                <div class="control-item">
+                    <span class="key">I</span>
+                    <span class="desc">Inwentarz</span>
+                </div>
+                <div class="control-item">
+                    <span class="key">Q</span>
+                    <span class="desc">Questy</span>
+                </div>
+                <div class="control-item">
+                    <span class="key">ESC</span>
+                    <span class="desc">Menu / Pauza</span>
+                </div>
+                <!-- Added audio volume control -->
+                <div class="control-item">
+                    <span class="key">M</span>
+                    <span class="desc">Wycisz / Włącz muzykę</span>
+                </div>
+            </div>
+            <button class="menu-btn" id="back-to-title">Powrót</button>
+        </div>
+    </div>
+
+    <!-- Main Game Screen -->
+    <div id="game-screen" class="screen">
+        <!-- HUD -->
+        <div id="hud">
+            <div class="hud-section" id="location-display">
+                <span class="hud-label">Lokacja:</span>
+                <span id="current-location">Szkoła - Korytarz</span>
+            </div>
+            <div class="hud-section" id="quest-indicator">
+                <span class="hud-label">Aktywne questy:</span>
+                <span id="active-quests-count">0</span>
+            </div>
+            <div class="hud-section" id="items-count">
+                <span class="hud-label">Przedmioty:</span>
+                <span id="inventory-count">0</span>
+            </div>
+            <!-- Added audio indicator -->
+            <div class="hud-section" id="audio-indicator">
+                <span id="audio-icon">🔊</span>
+            </div>
+        </div>
+
+        <!-- Game Canvas -->
+        <canvas id="game-canvas"></canvas>
+
+        <!-- Interaction Prompt -->
+        <div id="interaction-prompt" class="hidden">
+            Naciśnij <span class="key-hint">E</span> aby porozmawiać
+        </div>
+
+        <!-- Dialog Box -->
+        <div id="dialog-box" class="hidden">
+            <div class="dialog-portrait" id="dialog-portrait"></div>
+            <div class="dialog-content">
+                <div class="dialog-name" id="dialog-name">NPC Name</div>
+                <div class="dialog-text" id="dialog-text"></div>
+                <div class="dialog-choices" id="dialog-choices"></div>
+                <div class="dialog-continue" id="dialog-continue">
+                    <span class="key-hint">Enter</span> aby kontynuować
+                </div>
+            </div>
+        </div>
+
+        <!-- Inventory Panel -->
+        <div id="inventory-panel" class="panel hidden">
+            <div class="panel-header">
+                <h3>Inwentarz</h3>
+                <button class="close-btn" id="close-inventory">✕</button>
+            </div>
+            <div class="panel-content">
+                <div id="inventory-grid" class="inventory-grid"></div>
+            </div>
+        </div>
+
+        <!-- Quest Panel -->
+        <div id="quest-panel" class="panel hidden">
+            <div class="panel-header">
+                <h3>Dziennik Questów</h3>
+                <button class="close-btn" id="close-quests">✕</button>
+            </div>
+            <div class="panel-content">
+                <div id="quest-list" class="quest-list"></div>
+            </div>
+        </div>
+
+        <!-- Notification -->
+        <div id="notification" class="notification hidden"></div>
+
+        <!-- Cutscene -->
+        <div id="cutscene" class="cutscene hidden">
+            <div class="cutscene-content">
+                <div id="cutscene-text"></div>
+                <button class="menu-btn" id="skip-cutscene">Pomiń</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
