@@ -3,131 +3,138 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kroniki Zagiętego Czasu: Misja Ucznia Ocalenia Historii</title>
-    <link rel="stylesheet" href="style.css">
+    <title>HISTORIA QUEST: Ratuj Przyszłość 🕰️</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Title Screen -->
-    <div id="title-screen" class="screen active">
-        <div class="title-container">
-            <h1 class="game-title">Kroniki Zagiętego Czasu</h1>
-            <p class="subtitle">Misja Ucznia Ocalenia Historii</p>
-            <div class="title-menu">
-                <button class="menu-btn" id="start-game">Rozpocznij Przygodę</button>
-                <button class="menu-btn" id="show-controls">Sterowanie</button>
+    <div class="game-container">
+        <!-- Ekran startowy -->
+        <div id="start-screen" class="screen active">
+            <div class="title-container">
+                <h1 class="glitch" data-text="HISTORIA QUEST">HISTORIA QUEST</h1>
+                <h2 class="subtitle">⏰ Ratuj Przyszłość ⏰</h2>
+                <div class="time-portal"></div>
             </div>
-            <div class="credits">Pełna wersja gry RPG z humorystycznymi postaciami historycznymi</div>
+            <div class="start-buttons">
+                <button class="btn-start" onclick="game.startGame()">
+                    🚀 Rozpocznij Przygodę
+                </button>
+                <button class="btn-start secondary" onclick="game.showInstructions()">
+                    📚 Jak Grać?
+                </button>
+            </div>
+            <p class="credits">Projekt semestralny z historii dla Pana Nieradko :)</p>
         </div>
-    </div>
 
-    <!-- Controls Screen -->
-    <div id="controls-screen" class="screen">
-        <div class="controls-container">
-            <h2>Sterowanie</h2>
-            <div class="control-list">
-                <div class="control-item">
-                    <span class="key">WASD / Strzałki</span>
-                    <span class="desc">Poruszanie się</span>
+        <!-- Ekran instrukcji -->
+        <div id="instructions-screen" class="screen">
+            <div class="instructions-box">
+                <h2>🎮 Jak Grać?</h2>
+                <div class="instruction-list">
+                    <div class="instruction-item">
+                        <span class="key">WASD</span> lub <span class="key">Strzałki</span> - Ruch
+                    </div>
+                    <div class="instruction-item">
+                        <span class="key">E</span> - Interakcja z postaciami
+                    </div>
+                    <div class="instruction-item">
+                        <span class="key">SPACJA</span> - Atak na Errory Historyczne
+                    </div>
+                    <div class="instruction-item">
+                        📖 Rozmawiaj z postaciami historycznymi
+                    </div>
+                    <div class="instruction-item">
+                        🧠 Odpowiadaj na pytania quizowe
+                    </div>
+                    <div class="instruction-item">
+                        ⚔️ Walcz z błędami w historii
+                    </div>
+                    <div class="instruction-item">
+                        🏆 Zbieraj punkty i osiągnięcia
+                    </div>
                 </div>
-                <div class="control-item">
-                    <span class="key">E / Enter</span>
-                    <span class="desc">Interakcja</span>
-                </div>
-                <div class="control-item">
-                    <span class="key">I</span>
-                    <span class="desc">Inwentarz</span>
-                </div>
-                <div class="control-item">
-                    <span class="key">Q</span>
-                    <span class="desc">Questy</span>
-                </div>
-                <div class="control-item">
-                    <span class="key">ESC</span>
-                    <span class="desc">Menu / Pauza</span>
-                </div>
-                <!-- Added audio volume control -->
-                <div class="control-item">
-                    <span class="key">M</span>
-                    <span class="desc">Wycisz / Włącz muzykę</span>
-                </div>
-            </div>
-            <button class="menu-btn" id="back-to-title">Powrót</button>
-        </div>
-    </div>
-
-    <!-- Main Game Screen -->
-    <div id="game-screen" class="screen">
-        <!-- HUD -->
-        <div id="hud">
-            <div class="hud-section" id="location-display">
-                <span class="hud-label">Lokacja:</span>
-                <span id="current-location">Szkoła - Korytarz</span>
-            </div>
-            <div class="hud-section" id="quest-indicator">
-                <span class="hud-label">Aktywne questy:</span>
-                <span id="active-quests-count">0</span>
-            </div>
-            <div class="hud-section" id="items-count">
-                <span class="hud-label">Przedmioty:</span>
-                <span id="inventory-count">0</span>
-            </div>
-            <!-- Added audio indicator -->
-            <div class="hud-section" id="audio-indicator">
-                <span id="audio-icon">🔊</span>
+                <button class="btn-start" onclick="game.hideInstructions()">Rozumiem!</button>
             </div>
         </div>
 
-        <!-- Game Canvas -->
-        <canvas id="game-canvas"></canvas>
+        <!-- Ekran gry -->
+        <div id="game-screen" class="screen">
+            <!-- HUD -->
+            <div class="hud">
+                <div class="hud-left">
+                    <div class="stat-box">
+                        <span class="stat-label">❤️ Życie:</span>
+                        <div class="health-bar">
+                            <div id="health-fill" class="health-fill"></div>
+                        </div>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-label">⭐ Punkty:</span>
+                        <span id="score" class="stat-value">0</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-label">🕐 Epoka:</span>
+                        <span id="era" class="stat-value">Muzeum</span>
+                    </div>
+                </div>
+                <div class="hud-right">
+                    <button class="hud-btn" onclick="game.toggleSound()">
+                        <span id="sound-icon">🔊</span>
+                    </button>
+                    <button class="hud-btn" onclick="game.showQuests()">
+                        📜 Questy
+                    </button>
+                </div>
+            </div>
 
-        <!-- Interaction Prompt -->
-        <div id="interaction-prompt" class="hidden">
-            Naciśnij <span class="key-hint">E</span> aby porozmawiać
-        </div>
+            <!-- Canvas gry -->
+            <canvas id="game-canvas"></canvas>
 
-        <!-- Dialog Box -->
-        <div id="dialog-box" class="hidden">
-            <div class="dialog-portrait" id="dialog-portrait"></div>
-            <div class="dialog-content">
-                <div class="dialog-name" id="dialog-name">NPC Name</div>
+            <!-- Dialog box -->
+            <div id="dialog-box" class="dialog-box">
+                <div class="dialog-character">
+                    <span id="dialog-name"></span>
+                </div>
                 <div class="dialog-text" id="dialog-text"></div>
-                <div class="dialog-choices" id="dialog-choices"></div>
-                <div class="dialog-continue" id="dialog-continue">
-                    <span class="key-hint">Enter</span> aby kontynuować
+                <div class="dialog-continue">Naciśnij ENTER aby kontynuować...</div>
+            </div>
+
+            <!-- Quiz box -->
+            <div id="quiz-box" class="quiz-box">
+                <div class="quiz-question" id="quiz-question"></div>
+                <div class="quiz-answers" id="quiz-answers"></div>
+            </div>
+
+            <!-- Quest notification -->
+            <div id="quest-notification" class="quest-notification">
+                <span id="quest-text"></span>
+            </div>
+        </div>
+
+        <!-- Panel questów -->
+        <div id="quests-panel" class="quests-panel">
+            <div class="quests-content">
+                <h2>📜 Twoje Questy</h2>
+                <div id="quests-list" class="quests-list"></div>
+                <button class="btn-start" onclick="game.hideQuests()">Zamknij</button>
+            </div>
+        </div>
+
+        <!-- Ekran końcowy -->
+        <div id="end-screen" class="screen">
+            <div class="end-container">
+                <h1 class="end-title">🎉 MISJA UKOŃCZONA! 🎉</h1>
+                <div class="end-stats">
+                    <p>Twój wynik: <span id="final-score" class="highlight">0</span> punktów</p>
+                    <p>Ukończone questy: <span id="completed-quests" class="highlight">0</span></p>
+                    <p>Poprawne odpowiedzi: <span id="correct-answers" class="highlight">0</span></p>
                 </div>
-            </div>
-        </div>
-
-        <!-- Inventory Panel -->
-        <div id="inventory-panel" class="panel hidden">
-            <div class="panel-header">
-                <h3>Inwentarz</h3>
-                <button class="close-btn" id="close-inventory">✕</button>
-            </div>
-            <div class="panel-content">
-                <div id="inventory-grid" class="inventory-grid"></div>
-            </div>
-        </div>
-
-        <!-- Quest Panel -->
-        <div id="quest-panel" class="panel hidden">
-            <div class="panel-header">
-                <h3>Dziennik Questów</h3>
-                <button class="close-btn" id="close-quests">✕</button>
-            </div>
-            <div class="panel-content">
-                <div id="quest-list" class="quest-list"></div>
-            </div>
-        </div>
-
-        <!-- Notification -->
-        <div id="notification" class="notification hidden"></div>
-
-        <!-- Cutscene -->
-        <div id="cutscene" class="cutscene hidden">
-            <div class="cutscene-content">
-                <div id="cutscene-text"></div>
-                <button class="menu-btn" id="skip-cutscene">Pomiń</button>
+                <div class="end-message">
+                    <p>Gratulacje! Naprawiłeś historię i uratowałeś przyszłość!</p>
+                </div>
+                <button class="btn-start" onclick="location.reload()">
+                    🔄 Zagraj Ponownie
+                </button>
             </div>
         </div>
     </div>
