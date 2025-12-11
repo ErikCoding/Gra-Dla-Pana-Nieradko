@@ -239,7 +239,7 @@ const game = {
           correct: 0,
         },
         thirdDialog: [
-          "Fantastycznie! Wróciłeś z sukcem!",
+          "Fantastycznie! Wróciłeś z sukcesem!",
           "Pokonałeś wszystkie Errory Historyczne w trzech epokach!",
           "Tutanchamon, Lancelot i Leonardo są bezpieczni!",
           "Historia została naprawiona i przyszłość jest uratowana!",
@@ -299,7 +299,7 @@ const game = {
         ],
         quiz: {
           question: "W którym roku odbyła się bitwa pod Grunwaldem?",
-          answers: ["1410", "1492", "1066", "1500"],
+          answers: ["1410", "1492", "1067", "1500"],
           correct: 0,
         },
         secondDialog: [
